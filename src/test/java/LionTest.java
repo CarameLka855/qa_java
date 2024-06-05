@@ -8,14 +8,14 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import java.util.ArrayList;
 import java.util.List;
+
+
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class LionTest {
 
     IFeline feline = new Feline();
     Lion lion = new Lion(feline);
-
     @Mock
     IFeline felineFood;
 
@@ -29,12 +29,17 @@ public class LionTest {
     // Проверка корректного вызова метода getFood() в изоляции
     @Test
     public void getFoodTest() throws Exception {
-        Lion lionFood = new Lion(felineFood);
-        List<String> eatMeatCollections = new ArrayList<>();
-        eatMeatCollections.add("Животные");
-        eatMeatCollections.add("Птицы");
-        eatMeatCollections.add("Рыба");
-        Mockito.when(lionFood.getFood()).thenReturn(eatMeatCollections);
+        List<String> eatMeatCollectionsExpected = List.of("Животные", "Птицы", "Рыба");
+        Mockito.when(felineFood.getFood("Хищник")).thenReturn(eatMeatCollectionsExpected);
+        List<String> lionFoodsActual = lion.getFood();
+        Assert.assertEquals(eatMeatCollectionsExpected,lionFoodsActual);
+    }
+
+    @Test
+    public void lionConstructorExceptionTest() {
+        Assert.assertThrows(Exception.class, () -> {
+            Lion lion = new Lion("Детеныш");
+        });
     }
 
 }

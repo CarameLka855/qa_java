@@ -1,3 +1,4 @@
+import com.example.Animal;
 import com.example.Feline;
 import org.junit.Assert;
 import org.junit.Test;
@@ -13,16 +14,16 @@ import java.util.List;
 public class FelineTest {
 
     @Mock
-    Feline feline;
+    Animal animal;
 
 // Проверка корректного вызова метода eatMeat() в изоляции от класса Animal
     @Test
-    public void geteatMeatTest() throws Exception {
-        List<String> eatMeatCollections = new ArrayList<>();
-        eatMeatCollections.add("Животные");
-        eatMeatCollections.add("Птицы");
-        eatMeatCollections.add("Рыба");
-        Mockito.when(feline.eatMeat()).thenReturn(eatMeatCollections);
+    public void getEatMeatTest() throws Exception {
+        List<String> eatMeatCollectionsExpected = List.of("Животные", "Птицы", "Рыба");
+        Mockito.when(animal.getFood("Хищник")).thenReturn(eatMeatCollectionsExpected);
+        Feline feline = new Feline();
+        List<String> eatMeatActual = feline.eatMeat();
+        Assert.assertEquals(eatMeatCollectionsExpected,eatMeatActual);
     }
 
     @Test
