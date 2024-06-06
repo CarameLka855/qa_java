@@ -7,7 +7,8 @@ public class Lion {
     boolean hasMane;
     private IFeline iFeline;
 
-    public Lion(String sex) throws Exception {
+    public Lion(String sex, IFeline iFeline) throws Exception {
+        this.iFeline = iFeline;
         if ("Самец".equals(sex)) {
             hasMane = true;
         } else if ("Самка".equals(sex)) {
@@ -15,9 +16,6 @@ public class Lion {
         } else {
             throw new Exception("Используйте допустимые значения пола животного - самей или самка");
         }
-    }
-    public Lion(IFeline iFeline) {
-        this.iFeline = iFeline;
     }
 
     public int getKittens() {

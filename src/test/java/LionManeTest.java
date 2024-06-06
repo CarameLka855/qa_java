@@ -1,3 +1,5 @@
+import com.example.Feline;
+import com.example.IFeline;
 import com.example.Lion;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,7 +26,8 @@ public class LionManeTest {
 
     @Test
     public void doesHaveManeTest() throws Exception {
-            Lion lion = new Lion(lionSex);
+            IFeline feline = new Feline();
+            Lion lion = new Lion(lionSex,feline);
             boolean lionHaveManeActual = lion.doesHaveMane();
             Assert.assertEquals(lionMane, lionHaveManeActual);
     }

@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.Spy;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.ArrayList;
@@ -13,17 +14,14 @@ import java.util.List;
 @RunWith(MockitoJUnitRunner.Silent.class)
 public class FelineTest {
 
-    @Mock
-    Animal animal;
+    @Spy
+    Feline feline;
 
 // Проверка корректного вызова метода eatMeat() в изоляции от класса Animal
     @Test
     public void getEatMeatTest() throws Exception {
-        List<String> eatMeatCollectionsExpected = List.of("Животные", "Птицы", "Рыба");
-        Mockito.when(animal.getFood("Хищник")).thenReturn(eatMeatCollectionsExpected);
-        Feline feline = new Feline();
-        List<String> eatMeatActual = feline.eatMeat();
-        Assert.assertEquals(eatMeatCollectionsExpected,eatMeatActual);
+        feline.eatMeat();
+        Mockito.verify(feline, Mockito.times(1)).getFood("Хищник");
     }
 
     @Test
